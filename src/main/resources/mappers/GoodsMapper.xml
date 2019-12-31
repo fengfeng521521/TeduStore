@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="cn.tedu.store.mapper.GoodsMapper">
+	<!-- 查询商品信息 -->
+	<!-- List<Goods> selectGoodsByCategoryId(@Param("categoryId") Integer categoryId,
+											@Param("offset") Integer offset,
+											@Param("count") Integer count); -->
+	<select id="selectGoodsByCategoryId"
+				resultType="cn.tedu.store.bean.Goods">
+		SELECT
+			id,
+			category_id as categoryId,
+			item_type as itemType,
+			title,
+			sell_point as sellPoint,
+			price,
+			num,
+			barcode,
+			image,
+			status,
+			priority,
+			created_user as createdUser,
+			created_time as createdTime,
+			modified_user as modifiedUser,
+			modified_time as modifiedTime
+		FROM
+			t_goods
+		WHERE
+			category_id = #{categoryId}
+		AND
+			status = 1
+		AND
+			num>0
+		ORDER BY
+			priority DESC
+		LIMIT #{offset},#{count}
+			
+	</select>
+	
+	<!-- 通过商品分类id获取商品数量 -->
+	<!-- Integer selectCountByCategoryId(Integer categoryId) -->
+	<select id="selectCountByCategoryId"
+				resultType="java.lang.Integer">
+		SELECT
+			count(*)
+		FROM
+			t_goods
+		WHERE
+			category_id = #{categoryId}			
+	</select>
+	
+	<!-- 通过商品id查询商品详情 -->
+	<!-- Goods selectGoodsById(String goodsId) -->
+	<select id="selectGoodsById" resultType="cn.tedu.store.bean.Goods">
+		SELECT
+			id,
+			category_id as categoryId,
+			item_type as itemType,
+			title,
+			sell_point as sellPoint,
+			price,
+			num,
+			barcode,
+			image,
+			status,
+			priority,
+			created_user as createdUser,
+			created_time as createdTime,
+			modified_user as modifiedUser,
+			modified_time as modifiedTime
+		FROM
+			t_goods
+		WHERE
+			id = #{goodsId}
+	</select>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

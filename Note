@@ -1,0 +1,48 @@
+地址管理模块
+创建表 t_address
+create table t_address(
+	id int auto_increment primary key,
+	uid int not null,
+	recv_name varchar(50) not null,
+	recv_province varchar(6) not null,
+	recv_city varchar(6) not null,
+	recv_area varchar(6) not null,
+	recv_district varchar(100) not null,//省市区的名字
+	recv_address varchar(100) not null,//详细地址
+	recv_phone varchar(32) not null,
+	recv_tel varchar(32),
+	recv_zip int(6),
+	recv_tag varchar(30),
+	is_default int(1),//是否为默认地址
+	created_user varchar(50),
+	created_time date,
+	modified_user varchar(50),
+	modified_time date
+)default charset=utf8;
+
+
+购物车
+t_cart
+
+create table t_cart(
+	id int primary key auto_increment,
+	goods_id varchar(200),
+	uid int,
+	num int,
+	created_user varchar(50),
+	created_time date,
+	modified_user varchar(50),
+	modified_time date
+)
+
+2.显示购物车
+值对象：从数据库中查询出的所有列的值
+不建议放在实体类bean里面
+
+
+
+
+
+
+
+
