@@ -5,6 +5,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import cn.tedu.store.bean.User;
 import cn.tedu.store.service.IUserService;
 
+/**@author fengfeng-20191231
+ */
 public class TestUser {
 	
 	private AbstractApplicationContext ac =
