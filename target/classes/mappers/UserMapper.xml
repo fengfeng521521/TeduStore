@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="cn.tedu.store.mapper.UserMapper">
+
+	<!-- 插入数据 -->
+	<!-- void insertUser(User user) -->
+	<insert id="insertUser"
+				parameterType="cn.tedu.store.bean.User">
+				
+		INSERT INTO t_user(
+			username,password,email,phone,image,gender,
+			created_user,created_time,modified_user,modified_time
+		)VALUES(
+			#{username},#{password},#{email},#{phone},#{image},#{gender},
+			#{createdUser},#{createdTime},#{modifiedUser},#{modifiedTime}
+		)			
+				
+	</insert>
+	
+	<!-- 根据用户名查询用户信息 -->
+	<!-- User selectUserByUsername(String username) -->
+	<select id="selectUserByUsername" resultType="cn.tedu.store.bean.User">
+	
+	SELECT
+		id,username,password,email,phone,image,gender,
+		created_user as createdUser,
+		created_time as createdTime,
+		modified_user as modifiedUser,
+		modified_time as modifiedTime
+	FROM 
+		t_user
+	WHERE
+		username = #{username}
+	
+	</select>
+	
+	
+	<!-- 通过邮箱查询数据 -->
+	<!-- Integer selectByEmail(String email) -->
+	<select id="selectByEmail"
+				resultType="java.lang.Integer">
+		
+		SELECT COUNT(email)
+		FROM
+			t_user
+		WHERE
+			email=#{email}			
+				
+	</select>
+	
+	<!-- 通过电话号码查询数据 -->
+	<!-- Integer selectByPhone(String phone) -->
+	<select id="selectByPhone"
+				resultType="java.lang.Integer">
+	
+		SELECT COUNT(phone)
+		FROM
+			t_user
+		WHERE
+			phone=#{phone}
+				
+	</select>
+	
+	<!-- 使用动态SQL语句 -->
+	<!-- 修改用户信息 -->
+	<!-- void updateUser(User user) -->
+	<update id="updateUser" 
+				parameterType="cn.tedu.store.bean.User">
+		
+		UPDATE t_user
+		SET
+			<if test="username!=null">
+				username=#{username},
+			</if>
+			<if test="gender!=null">
+				gender=#{gender},
+			</if>
+			<if test="phone!=null">
+				phone=#{phone},
+			</if>
+			<if test="email!=null">
+				email=#{email},
+			</if>
+			<if test="password!=null">
+				password=#{password},
+			</if>
+			modified_user=#{modifiedUser},
+			modified_time=#{modifiedTime}
+		WHERE
+			id=#{id}
+					
+	</update>
+	
+	<!-- 根据用户id查询用户信息 -->
+	<!-- User selectUserById(Integer id) -->
+	<select id="selectUserById" 
+				resultType="cn.tedu.store.bean.User">
+				
+		SELECT
+			id,username,password,email,phone,image,gender,
+			created_user as createdUser,
+			created_time as createdTime,
+			modified_user as modifiedUser,
+			modified_time as modifiedTime
+		FROM 
+			t_user
+		WHERE
+			id = #{id}		
+				
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
